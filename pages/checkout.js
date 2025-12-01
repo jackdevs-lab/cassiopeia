@@ -53,7 +53,7 @@ export default function Checkout ({creditCards, gateways}) {
 
   return (
     <div className="checkout">
-      <Title>Checkout | Cassiopeia | Flower store</Title>
+      <Title>Checkout | The Florist | Flower store</Title>
 
       <BreadCrumb />
       <PageName>Checkout</PageName>
@@ -322,12 +322,12 @@ const CheckoutContent = ({creditCards, gateways}) => {
             <div className="checkout__shipping-store">
               <div>
                 <input type="radio" name="radio" checked />
-                <span>120 Nguyen Thai Hoc Street, Pham Ngu Lao Ward, Hoang Mai district, Ha Noi</span>
+                <span>Nairobi CBD</span>
               </div>
 
               <div>
                 <input type="radio" name="radio" />
-                <span>233 Cong Hoa Street, 13 Ward, Tan Binh district, HCM city</span>
+                <span>Kiambu Town</span>
               </div>
             </div>
   
@@ -345,8 +345,8 @@ const CheckoutContent = ({creditCards, gateways}) => {
           <p>Delivery address</p>
           <div className="checkout__shipping-address">
             <select>
-              <option value="Hanoi">Ha Noi</option>
-              <option value="HCM city">HCM city</option>
+              <option value="Naiobii">Nairobi</option>
+              <option value="Nairobi CBD">Nairobi CBD</option>
             </select>
 
             <span></span>

@@ -10,7 +10,7 @@ import Gallery from "../../components/contents/gallery"
 export default function AboutUs () {
   return (
     <div className="about-us">
-      <Title>About us | Cassiopeia | Flower store</Title>
+      <Title>About us | The Florist | Flower store</Title>
       <Description>
         Over the course of the last 15 years we have grown steadily
         thanks to the trust placed in us by our customers.
@@ -19,7 +19,7 @@ export default function AboutUs () {
         countries around the world.
       </Description>
       <OpenGraph 
-        name="About us | Cassiopeia"
+        name="About us | The Florist"
         desc="Over the course of the last 15 years we have grown steadily
           thanks to the trust placed in us by our customers.
           Today, We are a leading company in the world for sending flowers.
@@ -46,7 +46,7 @@ function AboutUsContent () {
       <p>
         The best way to brighten the special day of a friend or loved
         one is with flowers. But what happens when that special someone
-        is far away? With Cassiopeia it is possible to surprise someone
+        is far away? With The Florist it is possible to surprise someone
         with a lovely bouquet no matter where he or she is in the world.
       </p>
 

@@ -3,7 +3,7 @@ import Head from "next/head"
 export default function Meta () {
   return (
     <Head>
-      <title>Cassiopeia | Flower Store</title>
+      <title>The Florist | Flower Store</title>
       <meta 
         name="description" 
         content="The beautiful & fresh flower store"

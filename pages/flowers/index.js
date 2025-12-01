@@ -41,7 +41,7 @@ export default function Flowers ({allFilters, allProducts}) {
   
   return (
     <div className="flowers">
-      <Title>Flowers | Cassiopeia</Title>
+      <Title>Flowers | The Florist</Title>
       <Description>
         Where you can buy fresh, beautiful and good quality flowers.
         Safe and Fast Delivery. Payment Online or Checkout on Delivery.
@@ -50,7 +50,7 @@ export default function Flowers ({allFilters, allProducts}) {
         Buy flowers, rose, lily, Lisianthus
       </Keywords>
       <OpenGraph 
-        name="Flowers | Cassiopeia"
+        name="Flowers | The Florist"
         desc="Where you can buy fresh, beautiful and good quality flowers.
           Safe and Fast Delivery. Payment Online or Checkout on Delivery."
         image="https://res.cloudinary.com/didlxgowc/image/upload/f_auto,c_limit,w_1920,q_auto/618e4590a0741095275917_t0fsvi.webp"
@@ -86,8 +86,8 @@ export async function getStaticProps() {
     }, {
         name: 'Price',
         children: [
-          'Under $10', '$10 - $50',
-          '$50 - $100', 'Over $100'
+          'Under Ksh 100', 'Ksh 100 - Ksh 500',
+          'Ksh 500 - Ksh 1000', 'Over Ksh 1000'
         ]
     }, {
         name: 'Type',

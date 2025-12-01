@@ -41,14 +41,14 @@ export default function Plants ({allFilters, allProducts}) {
 
   return (
     <div className="plants">
-      <Title>Plants | Cassiopeia</Title>
+      <Title>Plants | The Florist</Title>
       <Description>
         Where you can buy beautiful and good quality plants.
         Safe and Fast Delivery. Payment Online or Checkout on Delivery.
       </Description>
       <Keywords>Buy plants, Anthurium, Orchid, Dendrobium</Keywords>
       <OpenGraph
-        name="Plants | Cassiopeia"
+        name="Plants | The Florist"
         desc="Where you can buy beautiful and good quality plants.
         Safe and Fast Delivery. Payment Online or Checkout on Delivery."
         image="https://res.cloudinary.com/didlxgowc/image/upload/f_auto,c_limit,w_1920,q_auto/61694097bfc2b371726052_njjyar.webp"
@@ -84,8 +84,8 @@ export async function getStaticProps() {
     }, {
         name: 'Price',
         children: [
-          'Under $20', '$20 - $70',
-          '$70 - $100', 'Over $100'
+          'Under Ksh 20', 'Ksh 20 - Ksh 70',
+          'Ksh 70 - Ksh 100', 'Over Ksh 100'
         ]
     }, {
         name: 'Type',

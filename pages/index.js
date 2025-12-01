@@ -10,22 +10,22 @@ import Container from "../components/contents/slide-container"
 export default function Home ({latestProducts, banners, relevantProducts}) {
   return (
     <>
-      <Title>Cassiopeia | Flower Store</Title>
+      <Title>The Florist | Flower Store</Title>
       <Description>
         The best way to brighten the special day of a friend
         or loved one is with flowers. But what happens when that
-        special someone is far away? With Cassiopeia it is possible
+        special someone is far away? With The Florist it is possible
         to surprise someone with a lovely bouquet no matter where he
         or she is in the world.
       </Description>
       <Keywords>
-        Cassiopeia, flower store, florist online, buy fresh flower and plant
+        The Florist, flower store, florist online, buy fresh flower and plant
       </Keywords>
       <OpenGraph 
-        name="Cassiopeia | Flower Store"
+        name="The Florist | Flower Store"
         desc="The best way to brighten the special day of a friend
           or loved one is with flowers. But what happens when that
-          special someone is far away? With Cassiopeia it is possible
+          special someone is far away? With The Florist it is possible
           to surprise someone with a lovely bouquet no matter where he
           or she is in the world."
         image="https://res.cloudinary.com/didlxgowc/image/upload/f_auto,c_limit,w_1920,q_auto/61827a9ebed9c874381634_vankxh.webp"

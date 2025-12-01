@@ -34,7 +34,7 @@ export default function DetailPage ({prs, relevantFlowers, page}) {
 
   return (
     <div className="product-detail">
-      <Title>{prs.name} | Cassiopeia</Title>
+      <Title>{prs.name} | The Florist</Title>
       <Description>
         {handleDescriptionText(prs)}
       </Description>

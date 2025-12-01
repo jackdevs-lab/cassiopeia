@@ -80,7 +80,7 @@ export default function Footer () {
           <div className="footer__col-1">
             <div className='footer__contact'>
               <p>Follow us</p>
-              <span>+84 0000 0000</span>
+              <span>+2547 94 756 485</span>
             </div>
             <div className="footer__media">
               {mediaList}
@@ -108,7 +108,7 @@ export default function Footer () {
 
             <div className='footer__contact footer__hiden'>
               <p>Follow us</p>
-              <span>+84 0000 0000</span>
+              <span>+2547 94 756 485</span>
               <div className="footer__media">
                 {mediaList}
               </div>
@@ -117,7 +117,7 @@ export default function Footer () {
         </div>
         
         <div className="footer__row-2">
-          &copy; Copyright,  2022. Developed by <a href="https://github.com/deehuynh">DeeHuynh</a>
+          &copy; Copyright,  2025. Developed by <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fmagic-portfolio-for-next-js-zeta-murex.vercel.app%2F%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExYXplSm9qTWJ3MTh4bjA4bHNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR5uOuRjNb2W8Fyaqf4dCt8BleGYUTmR5qJ0qPgKXpvAhTp1ux-ty8TjGcxedw_aem_lIBSJsK24_atEQ6DC0y4dw&h=AT2aOmxq6Dlhz9AS9LhqBUIsTpEGgjSsBth-MmyE6s5kwAOzHFAzwLLhrqhS38h_hJ-uh71R6aKpUQX2x5LX1P6PM9ZnnCt-Si6V2OdL-AC2itUMQmfzsNjrvX216M4_oOxp">Ndegwa</a>
         </div>
       </div>
     </footer>

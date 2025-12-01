@@ -15,8 +15,8 @@ export default function Item (props) {
   const id = props.id;
   const thumbnail = props.thumbnail;
   const prName = props.name ? props.name : '';
-  const prPrice = props.price ? '$ ' + props.price : '';
-  const prOldPrice = props.oldPrice  ? '$' + props.oldPrice : '';
+  const prPrice = props.price ? 'Ksh ' + props.price : '';
+  const prOldPrice = props.oldPrice  ? 'Ksh' + props.oldPrice : '';
   const offer = props.offer ? props.offer : "";
   const imageType = props.imageType;
   const page = props.page;

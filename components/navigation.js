@@ -45,7 +45,7 @@ export default function Nav (props) {
 
       <div className="nav__location">
         <img src="/svgs/location.svg" alt="location icon" />
-        <span>Vietnam</span>
+        <span>Kenya</span>
       </div>
     </nav>
   )

@@ -48,7 +48,7 @@ export default function Header (props) {
     <header className="header">
       <div className="header__location">
         <img src="/svgs/location.svg" alt="location icon" />
-        <span>Vietnam</span>
+        <span>Kenya</span>
       </div>
 
       <div className="header__menu">
@@ -81,7 +81,7 @@ export default function Header (props) {
             handleShowButton(closeNavRef, openNavRef, 'show', 'hiden');
             preventBodyScroll(false);
           }}
-          src="/svgs/close.svg" alt="close menu" 
+          //src="/svgs/close.svg" alt="close menu" 
         />
       </div>
 
@@ -106,7 +106,7 @@ export default function Header (props) {
                 orderCartRef.current.className = "show";
                 handleResetSearchInput();
               }}
-              src="/svgs/logo.svg" alt="Logo" 
+              //src="/svgs/logo.png" alt="Logo" 
             />
           </a>
         </Link>
