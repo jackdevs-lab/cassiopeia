@@ -2,6 +2,7 @@
 import {useRef} from "react"
 // next api
 import Link from "next/link"
+import { useState, useEffect } from 'react';
 // functions
 import handleShow from "../function/handleShow";
 import handleShowButton from "../function/handleShowButton"
@@ -43,6 +44,11 @@ export default function Header (props) {
     dispatch(setSearchKey(''));
     dispatch(getItems([]));
   }
+  const [isMounted, setIsMounted] = useState(false);
+
+useEffect(() => {
+  setIsMounted(true);
+}, []);
 
   return (
     <header className="header">
@@ -145,31 +151,29 @@ export default function Header (props) {
         </div>
 
         <div className="header__cart">
-          <span ref={orderCartRef} className="show" suppressHydrationWarning={true}>
-            {
-              totalCart === 0 ? '' : (
-                <span 
-                  className="header__cart-order"
-                  onClick={()=>{
-                    handleShow(cartRef, 'cart-modal cart-modal__hidden', 'cart-modal cart-modal__show');
-                    handleShow(orderCartRef, 'hiden','show');
-                    preventBodyScroll(true);
-                    handleShowButton(openCartRef, closeCartRef, 'show', 'hiden');
-                    preventOnClick(
-                      [{
-                        contentRef: navRef, hidden: 'nav nav--hiden'
-                      }, openNavRef, closeNavRef],
-                      [{searchRef: searchRef, mSearchRef: mSearchRef}, searchBtnRef]
-                    );
-                    handleResetSearchInput();
-                    overlayModalRef.current.className = "modal-container__overlay modal-container__overlay--show"
-                  }}
-                >
-                  {totalCart}
-                </span>
-              )
-            }
-          </span>
+  <span ref={orderCartRef} className="show">
+    {isMounted && totalCart > 0 && (
+      <span
+        className="header__cart-order"
+        onClick={() => {
+          handleShow(cartRef, 'cart-modal cart-modal__hidden', 'cart-modal cart-modal__show');
+          handleShow(orderCartRef, 'hiden', 'show');
+          preventBodyScroll(true);
+          handleShowButton(openCartRef, closeCartRef, 'show', 'hiden');
+          preventOnClick(
+            [{
+              contentRef: navRef, hidden: 'nav nav--hiden'
+            }, openNavRef, closeNavRef],
+            [{ searchRef: searchRef, mSearchRef: mSearchRef }, searchBtnRef]
+          );
+          handleResetSearchInput();
+          overlayModalRef.current.className = "modal-container__overlay modal-container__overlay--show";
+        }}
+      >
+        {totalCart}
+      </span>
+    )}
+  </span>
 
           <img
             className="show"
