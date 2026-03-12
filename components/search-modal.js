@@ -49,8 +49,8 @@ function Item ({item}) {
   }
 
   return (
-    <Link href={`/${item.page}/${item.id}`}>
-      <a onClick={handleResetSearchInput} className="search-modal__item">
+    <Link href={`/${item.page}/${item.id}`} passHref
+      onClick={handleResetSearchInput} className="search-modal__item" >
         <span className="search-modal__thumbnail">
           <Image 
             src={item.thumbnail}
@@ -64,7 +64,7 @@ function Item ({item}) {
           <span className="search-modal__name">{item.name}</span>
           <span className="search-modal__price">${item.price}</span>
         </span>
-      </a>
+    
     </Link>
   )
 }

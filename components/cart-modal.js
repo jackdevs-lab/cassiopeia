@@ -81,11 +81,14 @@ function Item ({storagedItems, closeCart}) {
     listItem.push(
       <div key={index} className="cart-modal__item">
         <div className="cart-modal__avatar">
-          <Link href={`/${item.page}/${item.id}`}>
-            <a className="cart-modal__avatar-overlay" onClick={closeCart}>
-              <img src="/svgs/view-btn.svg" alt="view detail" />
-            </a>
-          </Link>
+            <Link 
+                href={`/${item.page}/${item.id}`} 
+                passHref
+                className="cart-modal__avatar-overlay" 
+                onClick={closeCart}
+              >
+  <img src="/svgs/view-btn.svg" alt="view detail" />
+</Link>
           <Image src={item.thumbnail} width={100} height={100} alt="thumbnail" />
         </div>
         <div className="cart-modal__infor">
@@ -277,16 +280,11 @@ function OrderTotal ({isClientSide}) {
 
 function CheckoutButton ({closeCart}) {
   return (
-    <Link href="/checkout">
-      <a>
-        <div 
-          onClick={closeCart}
-          className="cart-modal__checkout-btn"
-        >
-          <span>Checkout</span>
-          <img src="/svgs/line-right-arrow.svg" alt="right arrow" />
-        </div>
-      </a>
-    </Link>
+    <Link href="/checkout" passHref onClick={closeCart}>
+      <div className="cart-modal__checkout-btn">
+        <span>Checkout</span>
+        <img src="/svgs/line-right-arrow.svg" alt="right arrow" />
+      </div>
+</Link>
   )
 }

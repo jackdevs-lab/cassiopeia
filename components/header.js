@@ -81,13 +81,13 @@ export default function Header (props) {
             handleShowButton(closeNavRef, openNavRef, 'show', 'hiden');
             preventBodyScroll(false);
           }}
+          alt="close menu"
           //src="/svgs/close.svg" alt="close menu" 
         />
       </div>
 
       <div className="header__logo">
-        <Link href="/">
-          <a>
+        <Link href="/" passHref>
             <img 
               onClick={()=>{
                 handleBackHome(
@@ -106,9 +106,10 @@ export default function Header (props) {
                 orderCartRef.current.className = "show";
                 handleResetSearchInput();
               }}
+              alt="Logo"
               //src="/svgs/logo.png" alt="Logo" 
             />
-          </a>
+        
         </Link>
       </div>
 

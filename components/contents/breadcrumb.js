@@ -48,10 +48,10 @@ export default function BreadCrumb (props) {
 
 function Tab (props) {
   return (
-    <Link href={props.url}>
-      <a className="breadcrumb__tab">
+    <Link href={props.url}
+      className="breadcrumb__tab">
         {props.tabName}
-      </a>
+      
     </Link>
   )
 }

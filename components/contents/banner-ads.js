@@ -32,13 +32,13 @@ export default function BannerAds (props) {
 
           {
             item.btnTitle !== '' ? (
-              <Link href={item.url}>
-                <a>
+              <Link href={item.url} passHref>
+                
                   <div className="banner-offer__btn">
                     <span>{item.btnTitle}</span>
-                    <img src="/svgs/line-right-arrow.svg" alt="right arrow" />
+                    <Image src="/svgs/line-right-arrow.svg" alt="right arrow" width={20} height={20} />
                   </div>
-                </a>
+                
               </Link>
             ) : ''
           }
@@ -66,13 +66,13 @@ export default function BannerAds (props) {
 
           {
             item.btnTitle !== '' ? (
-              <Link href={item.url}>
-                <a>
+              <Link href={item.url} passHref>
+                
                   <div className="banner-offer__btn banner-offer__btn--light">
                     <span>{item.btnTitle}</span>
-                    <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" />
+                    <Image src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={20} height={20} />
                   </div>
-                </a>
+                
               </Link>
             ) : ''
           }
@@ -105,13 +105,13 @@ export default function BannerAds (props) {
   
             {
               item.btnTitle !== '' ? (
-                <Link href={item.url}>
-                  <a>
+                <Link href={item.url} passHref>
+                  
                     <div className="m-banner-offer__btn m-banner-offer--spacing">
                       <span>{item.btnTitle}</span>
-                      <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" />
+                      <Image src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={20} height={20} />
                     </div>
-                  </a>
+                  
                 </Link>
               ) : ''
             }
@@ -141,13 +141,13 @@ export default function BannerAds (props) {
   
             {
               item.btnTitle !== '' ? (
-                <Link href={item.url}>
-                  <a>
+                <Link href={item.url} passHref>
+                  
                     <div className="m-banner-offer__btn">
                       <span>{item.btnTitle}</span>
-                      <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" />
+                      <Image src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={20} height={20} />
                     </div>
-                  </a>
+                  
                 </Link>
               ) : ''
             }

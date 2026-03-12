@@ -51,14 +51,14 @@ export default function Item (props) {
 
   if (props.seeMore) {
     return (
-      <Link href={`/${page}`}>
-        <a className="content__see-more-item">
+      <Link href={`/${page}`} passHref
+         className="content__see-more-item">
           <h3>Catalog</h3>
           <p>
             <span>See more</span> 
             <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" />
           </p>
-        </a>
+       
       </Link>
     )
   }
@@ -95,10 +95,11 @@ export default function Item (props) {
             </span>
           </div>
 
-          <Link href={`/${page}/${id}`}>
-            <a className="content__thumbnail-view-btn">
+          <Link href={`/${page}/${id}`}
+            passHref
+            className="content__thumbnail-view-btn">
               <img src="/svgs/view-btn.svg" alt="view detail" />
-            </a>
+            
           </Link>
         </div>
 
@@ -111,10 +112,12 @@ export default function Item (props) {
         }
       </div>
 
-      <Link href={`/${page}/${id}`}>
-        <a className="content__product-name">
+      <Link href={`/${page}/${id}`}
+        passHref
+      
+         className="content__product-name">
           {prName}
-        </a>
+        
       </Link>
 
       <p className="content__product-price">

@@ -288,8 +288,8 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
       className="product-detail__button-group"
       onClick={() => reduxDispatch(addToCart({...prDetail, amount: prAmount, page: page}))}
     >
-      <Link href='/checkout'>
-        <a className="product-detail__order-btn">Order now</a>
+      <Link href='/checkout'
+         className="product-detail__order-btn">Order now
       </Link>
       <div
         className="product-detail__cart-btn"

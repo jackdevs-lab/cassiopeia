@@ -241,7 +241,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
       return (
         <div className="checkout__button-next" onClick={handlerNextStage}>
           <span>{name === 'Shipping' && buttonStates === 'payment' ? 'Submit' : name}</span>
-          <img src="/svgs/line-right-arrow.svg" alt="right arrow" />
+          <Image src="/svgs/line-right-arrow.svg" alt="right arrow" width={24} height={24} />
         </div>
       )
     }
@@ -250,7 +250,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
       const addedClass = buttonStates !== 'contacts' ? ' checkout__button-pre--current' : '';
       return (
         <div className={`checkout__button-pre` + addedClass} onClick={handlerPreStage}>
-          <img src="/svgs/line-left-arrow-black.svg" alt="left arrow" />
+          <Image src="/svgs/line-left-arrow-black.svg" alt="left arrow" width={24} height={24} />
           <span>Back step</span>
         </div>
       )
@@ -321,7 +321,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
             <p>Available stores</p>
             <div className="checkout__shipping-store">
               <div>
-                <input type="radio" name="radio" checked />
+                <input type="radio" name="radio" defaultChecked />
                 <span>Nairobi CBD</span>
               </div>
 
@@ -371,8 +371,8 @@ const CheckoutContent = ({creditCards, gateways}) => {
           <div>
             {
               deliveryMethodState === 'pickup' ?
-              <img src="/svgs/radio-checked.svg" alt="radio" /> :
-              <img src="/svgs/radio-unchecked.svg" alt="radio" />
+              <Image src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
+              <Image src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
             }
           </div>
           <div>
@@ -392,8 +392,8 @@ const CheckoutContent = ({creditCards, gateways}) => {
           <div>
             {
               deliveryMethodState === 'courier' ?
-              <img src="/svgs/radio-checked.svg" alt="radio" /> :
-              <img src="/svgs/radio-unchecked.svg" alt="radio" />
+              <Image src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
+              <Image src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
             }
           </div>
           <div>
@@ -485,8 +485,8 @@ const CheckoutContent = ({creditCards, gateways}) => {
         >
           {
             paymentState === false ?
-            <img src="/svgs/radio-checked.svg" alt="radio" /> :
-            <img src="/svgs/radio-unchecked.svg" alt="radio" />
+            <Image src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
+            <Image src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
           }
           <span>Payment on Delivery</span>
         </div>
@@ -497,8 +497,8 @@ const CheckoutContent = ({creditCards, gateways}) => {
         >
           {
             paymentState === true ?
-            <img src="/svgs/radio-checked.svg" alt="radio" /> :
-            <img src="/svgs/radio-unchecked.svg" alt="radio" />
+            <Image src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
+            <Image src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
           }
           <span>Online Payment</span>
         </div>
@@ -524,11 +524,11 @@ const CheckoutContent = ({creditCards, gateways}) => {
           <p>Gender <span>{checkoutInfor.gender}</span></p>
         </div>
 
-        <Link href='/'>
-          <a className="checkout__complete-back">
+        <Link href='/' passHref
+           className="checkout__complete-back">
             <span>Come back homepage</span>
-            <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" />
-          </a>
+            <Image src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={24} height={24} />
+         
         </Link>
       </div>
     )

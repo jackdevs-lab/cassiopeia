@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 
 const socialMedia = [
   {name: 'instagram', url: 'https://www.instagram.com', image: '/svgs/instagram.svg'},
@@ -29,8 +30,8 @@ const legalAPI = [
 function Tab (props) {
   return (
     <span>
-      <Link href={props.url}>
-        <a>{props.title}</a>
+      <Link href={props.url} passHref>
+        {props.title}
       </Link>
     </span>
   )
@@ -38,8 +39,8 @@ function Tab (props) {
 
 function MediaLink (props) {
   return (
-    <a href={props.url}>
-      <img src={props.image} alt={props.name} />
+    <a href={props.url} passHref>
+      <Image src={props.image} alt={props.name} width={24} height={24} />
     </a>
   )
 }
