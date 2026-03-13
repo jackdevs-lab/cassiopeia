@@ -14,7 +14,7 @@ import FilterBar from "../../components/contents/filter-bar"
 import ProductsContainer from "../../components/contents/products-container"
 import NoProductsFound from "../../components/contents/no-products-found"
 
-export default function Flowers ({allFilters, allProducts}) {
+export default function Flowers({ allFilters, allProducts }) {
   // count products
   const countPr = allProducts && allProducts.length;
   // products state
@@ -38,7 +38,7 @@ export default function Flowers ({allFilters, allProducts}) {
     setProductState(allProducts)
     setIsEmptyData(false)
   }, [allProducts])
-  
+
   return (
     <div className="flowers">
       <Title>Flowers | The Florist</Title>
@@ -49,7 +49,7 @@ export default function Flowers ({allFilters, allProducts}) {
       <Keywords>
         Buy flowers, rose, lily, Lisianthus
       </Keywords>
-      <OpenGraph 
+      <OpenGraph
         name="Flowers | The Florist"
         desc="Where you can buy fresh, beautiful and good quality flowers.
           Safe and Fast Delivery. Payment Online or Checkout on Delivery."
@@ -58,15 +58,15 @@ export default function Flowers ({allFilters, allProducts}) {
 
       <BreadCrumb />
       <PageName>Flowers</PageName>
-      <FilterBar 
-        allFilters={allFilters} allProducts={allProducts} 
+      <FilterBar
+        allFilters={allFilters} allProducts={allProducts}
         page="flowers"
-        countPr={countPr} 
+        countPr={countPr}
       />
 
       {
-        isEmptyData === false ? 
-          <ProductsContainer page="flowers" allProducts={productState} /> : 
+        isEmptyData === false ?
+          <ProductsContainer page="flowers" allProducts={productState} /> :
           <NoProductsFound text={flowersData.type} />
       }
     </div>
@@ -84,29 +84,30 @@ export async function getStaticProps() {
         'High to low'
       ]
     }, {
-        name: 'Price',
-        children: [
-          'Under Ksh 100', 'Ksh 100 - Ksh 500',
-          'Ksh 500 - Ksh 1000', 'Over Ksh 1000'
-        ]
+      name: 'Price',
+      children: [
+        'Under Ksh 100', 'Ksh 100 - Ksh 500',
+        'Ksh 500 - Ksh 1000', 'Over Ksh 1000'
+      ]
     }, {
-        name: 'Type',
-        children: [
-          'Roses', 'Lilies',
-          'Gerberas', 'Chrysanthemums',
-          'Lisianthus', 'Alstroemerias'
-        ]
+      name: 'Type',
+      children: [
+        'Roses', 'Lilies',
+        'Gerberas', 'Chrysanthemums',
+        'Lisianthus', 'Alstroemerias'
+      ]
     }, {
-        name: 'Occasion',
-        children: [
-          'Wedding',
-          'Birthday',
-          'Christmas'
-        ]
+      name: 'Occasion',
+      children: [
+        'Wedding',
+        'Birthday',
+        'Christmas'
+      ]
     }
   ];
 
-  const res = await fetch(`https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/flowers.json`);
+  const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || 'https://florist-10b34-default-rtdb.asia-southeast1.firebasedatabase.app';
+  const res = await fetch(`${dbUrl}/flowers.json`);
   const data = await res.json();
   const allProducts = data.reverse();
 

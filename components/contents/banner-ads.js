@@ -1,8 +1,9 @@
 import Image from "next/legacy/image"
 import Link from "next/link"
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { getImageSrc } from '../../lib/imageLoader';
 
-export default function BannerAds (props) {
+export default function BannerAds(props) {
   // ads data
   const adsAPI = props.adsAPI;
   const slideBanner = [];
@@ -16,7 +17,7 @@ export default function BannerAds (props) {
             {
               item.background !== '' ? (
                 <Image
-                  src={item.background}
+                  src={getImageSrc(item.background)}
                   alt={item.title}
                   width={1160}
                   height={220}
@@ -33,12 +34,12 @@ export default function BannerAds (props) {
           {
             item.btnTitle !== '' ? (
               <Link href={item.url} passHref>
-                
-                  <div className="banner-offer__btn">
-                    <span>{item.btnTitle}</span>
-                    <Image src="/svgs/line-right-arrow.svg" alt="right arrow" width={20} height={20} />
-                  </div>
-                
+
+                <div className="banner-offer__btn">
+                  <span>{item.btnTitle}</span>
+                  <img src="/svgs/line-right-arrow.svg" alt="right arrow" width={20} height={20} />
+                </div>
+
               </Link>
             ) : ''
           }
@@ -50,7 +51,7 @@ export default function BannerAds (props) {
           {
             item.background !== '' ? (
               <Image
-                src={item.background}
+                src={getImageSrc(item.background)}
                 alt='banner'
                 width={560}
                 height={221}
@@ -67,12 +68,12 @@ export default function BannerAds (props) {
           {
             item.btnTitle !== '' ? (
               <Link href={item.url} passHref>
-                
-                  <div className="banner-offer__btn banner-offer__btn--light">
-                    <span>{item.btnTitle}</span>
-                    <Image src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={20} height={20} />
-                  </div>
-                
+
+                <div className="banner-offer__btn banner-offer__btn--light">
+                  <span>{item.btnTitle}</span>
+                  <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={20} height={20} />
+                </div>
+
               </Link>
             ) : ''
           }
@@ -88,30 +89,30 @@ export default function BannerAds (props) {
           <div className="m-banner-offer__slide">
             {
               item.background !== '' ? (
-                <Image 
-                  src={item.background}
+                <Image
+                  src={getImageSrc(item.background)}
                   alt='banner ads'
                   layout='fill'
                   objectFit='cover'
                 />
               ) : ''
             }
-  
+
             <div className="m-banner-offer__title m-banner-offer--spacing">
               {item.title}
             </div>
-  
+
             <p className="m-banner-offer__des m-banner-offer--spacing">{item.description}</p>
-  
+
             {
               item.btnTitle !== '' ? (
                 <Link href={item.url} passHref>
-                  
-                    <div className="m-banner-offer__btn m-banner-offer--spacing">
-                      <span>{item.btnTitle}</span>
-                      <Image src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={20} height={20} />
-                    </div>
-                  
+
+                  <div className="m-banner-offer__btn m-banner-offer--spacing">
+                    <span>{item.btnTitle}</span>
+                    <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={20} height={20} />
+                  </div>
+
                 </Link>
               ) : ''
             }
@@ -124,30 +125,30 @@ export default function BannerAds (props) {
           <div className="m-banner-offer__slide">
             {
               item.background !== '' ? (
-                <Image 
-                  src={item.background}
+                <Image
+                  src={getImageSrc(item.background)}
                   alt='banner ads'
                   layout='fill'
                   objectFit='cover'
                 />
               ) : ''
             }
-  
+
             <div className="m-banner-offer__title">
               {item.title}
             </div>
-  
+
             <p className="m-banner-offer__des">{item.description}</p>
-  
+
             {
               item.btnTitle !== '' ? (
                 <Link href={item.url} passHref>
-                  
-                    <div className="m-banner-offer__btn">
-                      <span>{item.btnTitle}</span>
-                      <Image src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={20} height={20} />
-                    </div>
-                  
+
+                  <div className="m-banner-offer__btn">
+                    <span>{item.btnTitle}</span>
+                    <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={20} height={20} />
+                  </div>
+
                 </Link>
               ) : ''
             }
@@ -167,7 +168,7 @@ export default function BannerAds (props) {
 
       <div className="m-banner-offer">
         <Splide
-          options = {{
+          options={{
             type: 'loop',
             perPage: 1,
             autoplay: true,

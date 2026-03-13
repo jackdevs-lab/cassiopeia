@@ -10,12 +10,13 @@ import preventBodyScroll from "../function/preventBodyScroll"
 import USDCurrency from "../handle_data_functions/usd-currency"
 // use redux
 import { useSelector, useDispatch } from "react-redux"
-import { 
+import {
   removeAll, increasePrQuantity, decreasePrQuantity, removePr,
   addPromocode
 } from "../redux/cartSlice"
+import { getImageSrc } from "../lib/imageLoader"
 
-export default function Cart (props) {
+export default function Cart(props) {
   // get items in cart store
   const cartData = useSelector(state => state.cart ? state.cart["items"] : [])
   // error server and client is not match
@@ -41,28 +42,28 @@ export default function Cart (props) {
       </h2>
 
       {
-        isClientSide === true && cartData.length === 0 ? 
+        isClientSide === true && cartData.length === 0 ?
           <div className="cart-modal__empty-cart">
             <h5>Your cart is empty</h5>
             <p>Next step: add a product to your cart</p>
           </div>
-        : (
-          <>
-            <Item storagedItems={isClientSide === true ? cartData : []} closeCart={closeCart} />
-            <RemoveAll />
-            <Promocode />
-            <OrderTotal isClientSide={isClientSide} />
-            <CheckoutButton
-              closeCart={closeCart}
-            />
-          </>
-        )
+          : (
+            <>
+              <Item storagedItems={isClientSide === true ? cartData : []} closeCart={closeCart} />
+              <RemoveAll />
+              <Promocode />
+              <OrderTotal isClientSide={isClientSide} />
+              <CheckoutButton
+                closeCart={closeCart}
+              />
+            </>
+          )
       }
     </div>
   )
 }
 
-function Item ({storagedItems, closeCart}) {
+function Item({ storagedItems, closeCart }) {
   const dispatch = useDispatch()
 
   const listItem = [];
@@ -81,15 +82,15 @@ function Item ({storagedItems, closeCart}) {
     listItem.push(
       <div key={index} className="cart-modal__item">
         <div className="cart-modal__avatar">
-            <Link 
-                href={`/${item.page}/${item.id}`} 
-                passHref
-                className="cart-modal__avatar-overlay" 
-                onClick={closeCart}
-              >
-  <img src="/svgs/view-btn.svg" alt="view detail" />
-</Link>
-          <Image src={item.thumbnail} width={100} height={100} alt="thumbnail" />
+          <Link
+            href={`/${item.page}/${item.id}`}
+            passHref
+            className="cart-modal__avatar-overlay"
+            onClick={closeCart}
+          >
+            <img src="/svgs/view-btn.svg" alt="view detail" />
+          </Link>
+          <Image src={getImageSrc(item.thumbnail)} width={100} height={100} alt="thumbnail" />
         </div>
         <div className="cart-modal__infor">
           <div className="cart-modal__infor-block-1">
@@ -100,16 +101,16 @@ function Item ({storagedItems, closeCart}) {
           <div className="cart-modal__infor-block-2">
             <div className="cart-modal__infor-counter">
               <img
-                src="/svgs/minus-btn.svg" alt="minus button" 
+                src="/svgs/minus-btn.svg" alt="minus button"
                 onClick={() => dispatch(
-                  decreasePrQuantity({id: item.id})
+                  decreasePrQuantity({ id: item.id })
                 )}
               />
               <span>{item.amount}</span>
-              <img 
-                src="/svgs/plus-btn.svg" alt="plus button" 
+              <img
+                src="/svgs/plus-btn.svg" alt="plus button"
                 onClick={() => dispatch(
-                  increasePrQuantity({id: item.id})
+                  increasePrQuantity({ id: item.id })
                 )}
               />
 
@@ -117,9 +118,9 @@ function Item ({storagedItems, closeCart}) {
             </div>
 
             <div className="cart-modal__infor-delete-btn">
-              <img 
+              <img
                 src="/svgs/delete-i.svg" alt="delete"
-                onClick={() => dispatch(removePr({id: item.id, page: item.page}))}
+                onClick={() => dispatch(removePr({ id: item.id, page: item.page }))}
               />
             </div>
           </div>
@@ -134,7 +135,7 @@ function Item ({storagedItems, closeCart}) {
   )
 }
 
-function RemoveAll () {
+function RemoveAll() {
   // redux dispatch
   const dispatch = useDispatch()
   // remove all items in the cart
@@ -153,15 +154,15 @@ function RemoveAll () {
   )
 }
 
-function Promocode () {
+function Promocode() {
   // get cart promocode
   const cartPromocode = useSelector(state => state.cart ? state.cart["promocode"] : null)
   // declare dispatch
   const dispatch = useDispatch()
   // promocode list
   const promocodeData = [
-    {name: '10DOLLARSOFF', number: 10},
-    {name: '20DOLLARSOFF', number: 20}
+    { name: '10DOLLARSOFF', number: 10 },
+    { name: '20DOLLARSOFF', number: 20 }
   ]
   // promocode state
   const [promocode, setPromocode] = useState('')
@@ -215,7 +216,7 @@ function Promocode () {
           type="text" value={promocode} placeholder='Add promocode'
           onChange={handleChangePromocode}
         />
-        <div 
+        <div
           className="cart-modal__promocode-btn"
           onClick={handlePromocode}
         >Apply</div>
@@ -230,7 +231,7 @@ function Promocode () {
   )
 }
 
-function OrderTotal ({isClientSide}) {
+function OrderTotal({ isClientSide }) {
   // get cart promocode
   const promocode = useSelector(state => state.cart ? state.cart["promocode"] : null)
   // handle order total
@@ -269,7 +270,7 @@ function OrderTotal ({isClientSide}) {
         <span>Order total</span>
         <span>
           {
-            isClientSide === true ? 
+            isClientSide === true ?
               USDCurrency(orderTotal - promocodeNumber) : ''
           }
         </span>
@@ -278,13 +279,13 @@ function OrderTotal ({isClientSide}) {
   )
 }
 
-function CheckoutButton ({closeCart}) {
+function CheckoutButton({ closeCart }) {
   return (
     <Link href="/checkout" passHref onClick={closeCart}>
       <div className="cart-modal__checkout-btn">
         <span>Checkout</span>
-        <img src="/svgs/line-right-arrow.svg" alt="right arrow" />
+        <img src="/svgs/line-right-arrow.svg" alt="right arrow" width={20} height={20} />
       </div>
-</Link>
+    </Link>
   )
 }

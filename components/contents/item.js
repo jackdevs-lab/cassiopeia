@@ -7,8 +7,9 @@ import Link from "next/link"
 // redux
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../../redux/cartSlice"
+import { getImageSrc } from "../../lib/imageLoader"
 
-export default function Item (props) {
+export default function Item(props) {
   // refs
   const cartButtonRef = useRef(null)
   // props
@@ -16,7 +17,7 @@ export default function Item (props) {
   const thumbnail = props.thumbnail;
   const prName = props.name ? props.name : '';
   const prPrice = props.price ? 'Ksh ' + props.price : '';
-  const prOldPrice = props.oldPrice  ? 'Ksh' + props.oldPrice : '';
+  const prOldPrice = props.oldPrice ? 'Ksh' + props.oldPrice : '';
   const offer = props.offer ? props.offer : "";
   const imageType = props.imageType;
   const page = props.page;
@@ -39,7 +40,7 @@ export default function Item (props) {
   // handled the effect of the added to cart items
   useEffect(() => {
     const itemExists = cartItems.find(item => (item.id === id) && (item.page === page))
-    
+
     if (itemExists) {
       cartButtonRef.current.className = "content__thumbnail-cart-btn--show"
     } else {
@@ -52,13 +53,13 @@ export default function Item (props) {
   if (props.seeMore) {
     return (
       <Link href={`/${page}`} passHref
-         className="content__see-more-item">
-          <h3>Catalog</h3>
-          <p>
-            <span>See more</span> 
-            <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" />
-          </p>
-       
+        className="content__see-more-item">
+        <h3>Catalog</h3>
+        <p>
+          <span>See more</span>
+          <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" />
+        </p>
+
       </Link>
     )
   }
@@ -69,7 +70,7 @@ export default function Item (props) {
         {
           thumbnail && thumbnail !== '' ? (
             <Image
-              src={thumbnail}
+              src={getImageSrc(thumbnail)}
               width={480}
               height={480}
               layout="responsive"
@@ -79,12 +80,12 @@ export default function Item (props) {
         }
 
         <div className="content__thumbnail-overlay">
-          <div 
+          <div
             className="content__thumbnail-cart-btn"
             onClick={handleAddToCart}
           >
             <img
-              src="/svgs/cart-btn.svg" alt="cart btn" 
+              src="/svgs/cart-btn.svg" alt="cart btn"
             />
 
             <span
@@ -98,8 +99,8 @@ export default function Item (props) {
           <Link href={`/${page}/${id}`}
             passHref
             className="content__thumbnail-view-btn">
-              <img src="/svgs/view-btn.svg" alt="view detail" />
-            
+            <img src="/svgs/view-btn.svg" alt="view detail" />
+
           </Link>
         </div>
 
@@ -114,10 +115,10 @@ export default function Item (props) {
 
       <Link href={`/${page}/${id}`}
         passHref
-      
-         className="content__product-name">
-          {prName}
-        
+
+        className="content__product-name">
+        {prName}
+
       </Link>
 
       <p className="content__product-price">
@@ -128,7 +129,7 @@ export default function Item (props) {
   )
 }
 
-function OfferStock ({children}) {
+function OfferStock({ children }) {
   return (
     <div className="content__item-offer-stock">
       <span></span>

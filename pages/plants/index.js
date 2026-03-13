@@ -14,7 +14,7 @@ import FilterBar from "../../components/contents/filter-bar"
 import ProductsContainer from "../../components/contents/products-container"
 import NoProductsFound from "../../components/contents/no-products-found"
 
-export default function Plants ({allFilters, allProducts}) {
+export default function Plants({ allFilters, allProducts }) {
   // count products
   const countPr = allProducts && allProducts.length;
   // products state
@@ -54,18 +54,18 @@ export default function Plants ({allFilters, allProducts}) {
         image="https://res.cloudinary.com/didlxgowc/image/upload/f_auto,c_limit,w_1920,q_auto/61694097bfc2b371726052_njjyar.webp"
       />
 
-      <BreadCrumb tabName={{url: '/plants', name: 'Plants'}} />
+      <BreadCrumb tabName={{ url: '/plants', name: 'Plants' }} />
       <PageName>Plants</PageName>
-      <FilterBar 
+      <FilterBar
         allFilters={allFilters} allProducts={allProducts}
         page="plants"
-        countPr={countPr} 
+        countPr={countPr}
       />
-      
+
       {
-        isEmptyData === false ? 
-        <ProductsContainer page="plants" allProducts={productState} /> :
-        <NoProductsFound text={plantsData.type} />
+        isEmptyData === false ?
+          <ProductsContainer page="plants" allProducts={productState} /> :
+          <NoProductsFound text={plantsData.type} />
       }
     </div>
   )
@@ -82,28 +82,29 @@ export async function getStaticProps() {
         'High to low'
       ]
     }, {
-        name: 'Price',
-        children: [
-          'Under Ksh 20', 'Ksh 20 - Ksh 70',
-          'Ksh 70 - Ksh 100', 'Over Ksh 100'
-        ]
+      name: 'Price',
+      children: [
+        'Under Ksh 20', 'Ksh 20 - Ksh 70',
+        'Ksh 70 - Ksh 100', 'Over Ksh 100'
+      ]
     }, {
-        name: 'Type',
-        children: [
-          'Orchid', 'Dendrobium',
-          'Anthurium', 'Spathiphyllum',
-          'Pine tree', 'Calathea zebrina'
-        ]
+      name: 'Type',
+      children: [
+        'Orchid', 'Dendrobium',
+        'Anthurium', 'Spathiphyllum',
+        'Pine tree', 'Calathea zebrina'
+      ]
     }, {
-        name: 'Occasion',
-        children: [
-          'Valentine',
-          'Christmas'
-        ]
+      name: 'Occasion',
+      children: [
+        'Valentine',
+        'Christmas'
+      ]
     }
   ];
 
-  const res = await fetch('https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/plants.json');
+  const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || 'https://florist-10b34-default-rtdb.asia-southeast1.firebasedatabase.app';
+  const res = await fetch(`${dbUrl}/plants.json`);
   const allPlants = await res.json()
   const allProducts = allPlants.reverse()
 

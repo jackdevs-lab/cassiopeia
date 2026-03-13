@@ -14,7 +14,7 @@ import ProductsContainer from "../../components/contents/products-container"
 import FilterBar from "../../components/contents/filter-bar"
 import NoProductsFound from "../../components/contents/no-products-found"
 
-export default function Gifts ({allFilters, allProducts}) {
+export default function Gifts({ allFilters, allProducts }) {
   const countPr = allProducts && allProducts.length
   // products state
   const [productState, setProductState] = useState(allProducts);
@@ -55,15 +55,15 @@ export default function Gifts ({allFilters, allProducts}) {
 
       <BreadCrumb />
       <PageName>Gifts</PageName>
-      <FilterBar 
+      <FilterBar
         allFilters={allFilters} countPr={countPr} page="gifts"
         allProducts={allProducts}
       />
-      
+
       {
         isEmptyData === false ?
-        <ProductsContainer page="gifts" allProducts={productState} /> :
-        <NoProductsFound text={giftsData.type} />
+          <ProductsContainer page="gifts" allProducts={productState} /> :
+          <NoProductsFound text={giftsData.type} />
       }
     </div>
   )
@@ -80,21 +80,22 @@ export async function getStaticProps() {
         'High to low'
       ]
     }, {
-        name: 'Price',
-        children: [
-          'Under Ksh 50', 'Ksh 50 - Ksh 100',
-          'Over Ksh 100'
-        ]
+      name: 'Price',
+      children: [
+        'Under Ksh 50', 'Ksh 50 - Ksh 100',
+        'Over Ksh 100'
+      ]
     }, {
-        name: 'Occasion',
-        children: [
-          'Valentine',
-          'New year'
-        ]
+      name: 'Occasion',
+      children: [
+        'Valentine',
+        'New year'
+      ]
     }
   ];
 
-  const res = await fetch('https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/gifts.json');
+  const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || 'https://florist-10b34-default-rtdb.asia-southeast1.firebasedatabase.app';
+  const res = await fetch(`${dbUrl}/gifts.json`);
   const dataList = await res.json()
   const allProducts = dataList.reverse()
 

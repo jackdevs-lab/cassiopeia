@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import {useRef} from "react"
+import { useRef } from "react"
 // next api
 import Link from "next/link"
 import { useState, useEffect } from 'react';
@@ -16,7 +16,7 @@ import { setValue, getItems, setSearchKey } from "../redux/searchSlice";
 // components
 import SearchInput from "./search-input";
 
-export default function Header (props) {
+export default function Header(props) {
   // handle cart store
   const totalCart = useSelector(state => state.cart ? state.cart["items"].length : 0)
   // nav ref container
@@ -46,9 +46,9 @@ export default function Header (props) {
   }
   const [isMounted, setIsMounted] = useState(false);
 
-useEffect(() => {
-  setIsMounted(true);
-}, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   return (
     <header className="header">
@@ -62,12 +62,12 @@ useEffect(() => {
           className='show'
           ref={openNavRef}
           onClick={
-            ()=>{
+            () => {
               handleShow(navRef, 'nav nav--hiden', 'nav nav--show');
               handleShowButton(openNavRef, closeNavRef, 'show', 'hiden');
               preventBodyScroll(true);
               preventOnClick(
-                [{searchRef: '', mSearchRef: mSearchRef}, searchBtnRef],
+                [{ searchRef: '', mSearchRef: mSearchRef }, searchBtnRef],
                 [{
                   contentRef: cartRef, hidden: 'cart-modal cart-modal__hidden'
                 }, openCartRef, closeCartRef]
@@ -79,43 +79,41 @@ useEffect(() => {
           src="/svgs/menu.svg" alt="menu"
         />
 
-        <img 
+        <img
           className='hiden'
           ref={closeNavRef}
-          onClick={()=>{
+          onClick={() => {
             handleShow(navRef, 'nav nav--hiden', 'nav nav--show');
             handleShowButton(closeNavRef, openNavRef, 'show', 'hiden');
             preventBodyScroll(false);
           }}
-          alt="close menu"
-          //src="/svgs/close.svg" alt="close menu" 
+          src="/svgs/close.svg" alt="close menu"
         />
       </div>
 
       <div className="header__logo">
         <Link href="/" passHref>
-            <img 
-              onClick={()=>{
-                handleBackHome(
-                  [
-                    [{
-                      contentRef: navRef, openRef: openNavRef,
-                      closeRef: closeNavRef, hidden: 'nav nav--hiden'
-                    }], [{
-                      contentRef: mSearchRef, btnRef: searchBtnRef , hidden: 'm-search__hiden'
-                    }], [{
-                      contentRef: cartRef, openRef: openCartRef,
-                      closeRef: closeCartRef, hidden: 'cart-modal cart-modal__hidden'
-                    }]
-                  ]
-                ); preventBodyScroll(false);
-                orderCartRef.current.className = "show";
-                handleResetSearchInput();
-              }}
-              alt="Logo"
-              //src="/svgs/logo.png" alt="Logo" 
-            />
-        
+          <img
+            onClick={() => {
+              handleBackHome(
+                [
+                  [{
+                    contentRef: navRef, openRef: openNavRef,
+                    closeRef: closeNavRef, hidden: 'nav nav--hiden'
+                  }], [{
+                    contentRef: mSearchRef, btnRef: searchBtnRef, hidden: 'm-search__hiden'
+                  }], [{
+                    contentRef: cartRef, openRef: openCartRef,
+                    closeRef: closeCartRef, hidden: 'cart-modal cart-modal__hidden'
+                  }]
+                ]
+              ); preventBodyScroll(false);
+              orderCartRef.current.className = "show";
+              handleResetSearchInput();
+            }}
+            src="/svgs/dahlia.png" alt="Logo"
+          />
+
         </Link>
       </div>
 
@@ -143,44 +141,44 @@ useEffect(() => {
                   }, openCartRef, closeCartRef]
                 );
                 orderCartRef.current.className = "show";
-                searchModalRef.current.className="search-modal search-modal--hidden";
+                searchModalRef.current.className = "search-modal search-modal--hidden";
                 handleResetSearchInput()
               }
-            } 
+            }
             src="/svgs/search.svg" alt="search icon" />
         </div>
 
         <div className="header__cart">
-  <span ref={orderCartRef} className="show">
-    {isMounted && totalCart > 0 && (
-      <span
-        className="header__cart-order"
-        onClick={() => {
-          handleShow(cartRef, 'cart-modal cart-modal__hidden', 'cart-modal cart-modal__show');
-          handleShow(orderCartRef, 'hiden', 'show');
-          preventBodyScroll(true);
-          handleShowButton(openCartRef, closeCartRef, 'show', 'hiden');
-          preventOnClick(
-            [{
-              contentRef: navRef, hidden: 'nav nav--hiden'
-            }, openNavRef, closeNavRef],
-            [{ searchRef: searchRef, mSearchRef: mSearchRef }, searchBtnRef]
-          );
-          handleResetSearchInput();
-          overlayModalRef.current.className = "modal-container__overlay modal-container__overlay--show";
-        }}
-      >
-        {totalCart}
-      </span>
-    )}
-  </span>
+          <span ref={orderCartRef} className="show">
+            {isMounted && totalCart > 0 && (
+              <span
+                className="header__cart-order"
+                onClick={() => {
+                  handleShow(cartRef, 'cart-modal cart-modal__hidden', 'cart-modal cart-modal__show');
+                  handleShow(orderCartRef, 'hiden', 'show');
+                  preventBodyScroll(true);
+                  handleShowButton(openCartRef, closeCartRef, 'show', 'hiden');
+                  preventOnClick(
+                    [{
+                      contentRef: navRef, hidden: 'nav nav--hiden'
+                    }, openNavRef, closeNavRef],
+                    [{ searchRef: searchRef, mSearchRef: mSearchRef }, searchBtnRef]
+                  );
+                  handleResetSearchInput();
+                  overlayModalRef.current.className = "modal-container__overlay modal-container__overlay--show";
+                }}
+              >
+                {totalCart}
+              </span>
+            )}
+          </span>
 
           <img
             className="show"
             ref={openCartRef}
-            onClick={()=>{
+            onClick={() => {
               handleShow(cartRef, 'cart-modal cart-modal__hidden', 'cart-modal cart-modal__show');
-              handleShow(orderCartRef, 'hiden','show');
+              handleShow(orderCartRef, 'hiden', 'show');
               overlayModalRef.current.className = "modal-container__overlay modal-container__overlay--show"
               preventBodyScroll(true);
               handleShowButton(openCartRef, closeCartRef, 'show', 'hiden');
@@ -188,24 +186,24 @@ useEffect(() => {
                 [{
                   contentRef: navRef, hidden: 'nav nav--hiden'
                 }, openNavRef, closeNavRef],
-                [{searchRef: searchRef, mSearchRef: mSearchRef}, searchBtnRef]
+                [{ searchRef: searchRef, mSearchRef: mSearchRef }, searchBtnRef]
               );
               handleResetSearchInput()
             }}
-            src="/svgs/cart.svg" alt="cart icon" 
+            src="/svgs/cart.svg" alt="cart icon"
           />
 
           <img
             className="hiden"
             ref={closeCartRef}
-            onClick={()=>{
+            onClick={() => {
               handleShow(cartRef, 'cart-modal cart-modal__hidden', 'cart-modal cart-modal__show');
-              handleShow(orderCartRef, 'hiden','show');
+              handleShow(orderCartRef, 'hiden', 'show');
               overlayModalRef.current.className = "modal-container__overlay modal-container__overlay--hidden"
               preventBodyScroll(false);
               handleShowButton(closeCartRef, openCartRef, 'show', 'hiden');
             }}
-            src="/svgs/close.svg" alt="cart icon" 
+            src="/svgs/close.svg" alt="cart icon"
           />
         </div>
       </div>

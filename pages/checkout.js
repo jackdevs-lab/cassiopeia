@@ -13,8 +13,9 @@ import { useSelector, useDispatch } from "react-redux"
 import { onChangeName, onChangePhone, selectGender } from "../redux/checkoutSlice"
 // handle data functions
 import USDCurrency from "../handle_data_functions/usd-currency";
+import { getImageSrc } from "../lib/imageLoader";
 
-export default function Checkout ({creditCards, gateways}) {
+export default function Checkout({ creditCards, gateways }) {
   // error server and client is not match
   const [isClientSide, setIsClientSide] = useState(false)
   // two-pass rendering
@@ -35,12 +36,12 @@ export default function Checkout ({creditCards, gateways}) {
   isClientSide === true && orderItems.forEach(
     (item, index) => {
       // count total order items
-      orderTotal += item.amount 
+      orderTotal += item.amount
       // count total price
       orderPriceTotal += Number(item.price) * item.amount
 
       listItem.push(
-        <Item 
+        <Item
           key={index}
           thumbnail={item.thumbnail}
           price={item.price}
@@ -78,7 +79,7 @@ const Item = (props) => {
   return (
     <div className="checkout__item">
       <div className="checkout__item-avatar">
-        <Image src={props.thumbnail} width={100} height={100} alt="thumbnail" />
+        <Image src={getImageSrc(props.thumbnail)} width={100} height={100} alt="thumbnail" />
       </div>
       <div className="checkout__item-infor">
         <div>
@@ -95,7 +96,7 @@ const Item = (props) => {
   )
 }
 
-const OrderContainer = ({listItem, orderTotal, orderPriceTotal, promocode}) => {
+const OrderContainer = ({ listItem, orderTotal, orderPriceTotal, promocode }) => {
   // get number of promocode
   const promocodeNumber = promocode ? promocode["number"] : 0
   // component partials
@@ -135,7 +136,7 @@ const OrderContainer = ({listItem, orderTotal, orderPriceTotal, promocode}) => {
   )
 }
 
-const CheckoutContent = ({creditCards, gateways}) => {
+const CheckoutContent = ({ creditCards, gateways }) => {
   // button states
   const [buttonStates, setButtonStates] = useState('contacts');
   // Progress component
@@ -145,11 +146,11 @@ const CheckoutContent = ({creditCards, gateways}) => {
     let finishedLineClass = '';
     // list button
     const listButtons = [
-      {stage: 1, title: 'Contacts'},
-      {stage: 2, title: 'Shipping'},
-      {stage: 3, title: 'Payment'},
+      { stage: 1, title: 'Contacts' },
+      { stage: 2, title: 'Shipping' },
+      { stage: 3, title: 'Payment' },
     ];
-    const ProgressButton = ({stage, title, addedClass}) => {
+    const ProgressButton = ({ stage, title, addedClass }) => {
       if (buttonStates === 'complete') {
         return (
           <div className='checkout__progress-btn  checkout__progress-btn--finished'>
@@ -167,7 +168,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
       }
     }
 
-    const ProgressLine = ({addedClass}) => {
+    const ProgressLine = ({ addedClass }) => {
       return (
         <div className={`checkout__progress-line` + addedClass}></div>
       )
@@ -176,7 +177,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
     return (
       <div className="checkout__progress">
         {
-          listButtons.map((item, index)=>{
+          listButtons.map((item, index) => {
             if (item.stage === 1 && buttonStates === 'contacts') {
               currentStageClass = ' checkout__progress-btn--current'
             } else if (item.stage === 2 && buttonStates === 'shipping') {
@@ -196,16 +197,16 @@ const CheckoutContent = ({creditCards, gateways}) => {
               return (
                 <ProgressButton
                   key={index} stage={item.stage} title={item.title}
-                  addedClass={currentStageClass} 
+                  addedClass={currentStageClass}
                 />
               )
             }
 
             return (
               <React.Fragment key={index}>
-                <ProgressButton 
+                <ProgressButton
                   stage={item.stage} title={item.title}
-                  addedClass={currentStageClass !== '' ? currentStageClass : finishedStageClass} 
+                  addedClass={currentStageClass !== '' ? currentStageClass : finishedStageClass}
                 />
                 <ProgressLine addedClass={finishedLineClass} />
               </React.Fragment>
@@ -218,13 +219,43 @@ const CheckoutContent = ({creditCards, gateways}) => {
 
   // Button group components
   const ButtonGroup = () => {
-    const handlerNextStage = () => {
+    const handlerNextStage = async () => {
       if (buttonStates === 'contacts') {
         setButtonStates('shipping');
       } else if (buttonStates === 'shipping') {
         setButtonStates('payment');
       } else if (buttonStates === 'payment') {
-        setButtonStates('complete');
+        // M-Pesa Integration Point
+        if (selectPaymentState === 'mpesa') {
+          try {
+            const checkoutInfor = store.getState().checkout;
+            const cartInfor = store.getState().cart;
+            const amount = cartInfor.items.reduce((total, item) => total + (item.price * item.amount), 0);
+
+            const response = await fetch('/api/mpesa/stkpush', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                amount: amount,
+                phone: checkoutInfor.phone,
+                accountReference: 'Order-' + Date.now()
+              })
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+              alert('M-Pesa STK Push Sent! Please check your phone to complete payment.');
+              setButtonStates('complete');
+            } else {
+              alert('Error: ' + result.message);
+            }
+          } catch (error) {
+            console.error('Payment Error:', error);
+            alert('Payment failed to initiate.');
+          }
+        } else {
+          setButtonStates('complete');
+        }
       }
     }
 
@@ -241,7 +272,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
       return (
         <div className="checkout__button-next" onClick={handlerNextStage}>
           <span>{name === 'Shipping' && buttonStates === 'payment' ? 'Submit' : name}</span>
-          <Image src="/svgs/line-right-arrow.svg" alt="right arrow" width={24} height={24} />
+          <img src="/svgs/line-right-arrow.svg" alt="right arrow" width={24} height={24} />
         </div>
       )
     }
@@ -250,7 +281,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
       const addedClass = buttonStates !== 'contacts' ? ' checkout__button-pre--current' : '';
       return (
         <div className={`checkout__button-pre` + addedClass} onClick={handlerPreStage}>
-          <Image src="/svgs/line-left-arrow-black.svg" alt="left arrow" width={24} height={24} />
+          <img src="/svgs/line-left-arrow-black.svg" alt="left arrow" width={24} height={24} />
           <span>Back step</span>
         </div>
       )
@@ -275,14 +306,14 @@ const CheckoutContent = ({creditCards, gateways}) => {
             <input
               type="text" placeholder='Full name' spellCheck='false'
               value={checkoutState.name}
-              onChange={(e) => dispatch(onChangeName({value: e.target.value}))}
+              onChange={(e) => dispatch(onChangeName({ value: e.target.value }))}
             />
           </div>
           <div className="checkout__contacts-phone">
-            <input 
+            <input
               type="text" placeholder='Phone number' spellCheck='false'
               value={checkoutState.phone}
-              onChange={(e) => dispatch(onChangePhone({value: e.target.value}))}
+              onChange={(e) => dispatch(onChangePhone({ value: e.target.value }))}
             />
           </div>
         </div>
@@ -290,20 +321,20 @@ const CheckoutContent = ({creditCards, gateways}) => {
         <div className="checkout__contacts-gender">
           <span>Gender:</span>
           <label htmlFor="gender-male">Male</label>
-          <input 
-            id="gender-male" type="radio" name='radio' value="Male" 
+          <input
+            id="gender-male" type="radio" name='radio' value="Male"
             checked={checkoutState.gender === 'Male' ? true : false}
             onChange={
-              (e) => {dispatch(selectGender({value: e.target.value}))}
-            } 
+              (e) => { dispatch(selectGender({ value: e.target.value })) }
+            }
           />
           <label htmlFor="gender-female">Female</label>
-          <input 
-            id="gender-female" type="radio" name='radio' value="Female" 
+          <input
+            id="gender-female" type="radio" name='radio' value="Female"
             checked={checkoutState.gender === 'Female' ? true : false}
             onChange={
-              (e) => {dispatch(selectGender({value: e.target.value}))}
-            } 
+              (e) => { dispatch(selectGender({ value: e.target.value })) }
+            }
           />
         </div>
       </div>
@@ -330,7 +361,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
                 <span>Kiambu Town</span>
               </div>
             </div>
-  
+
             <p>Date & time of receipt</p>
             <div className="checkout__shipping-pickup">
               <input className='checkout__shipping-date' type="text" placeholder='dd/mm/yyyy' defaultValue='' />
@@ -363,16 +394,16 @@ const CheckoutContent = ({creditCards, gateways}) => {
         <div
           className={
             deliveryMethodState === 'pickup' ?
-            'checkout__shipping-delivery checkout__shipping-delivery--checked' :
-            'checkout__shipping-delivery'
+              'checkout__shipping-delivery checkout__shipping-delivery--checked' :
+              'checkout__shipping-delivery'
           }
-          onClick={()=>{setDeliveryMethodState('pickup')}}
+          onClick={() => { setDeliveryMethodState('pickup') }}
         >
           <div>
             {
               deliveryMethodState === 'pickup' ?
-              <Image src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
-              <Image src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
+                <img src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
+                <img src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
             }
           </div>
           <div>
@@ -384,16 +415,16 @@ const CheckoutContent = ({creditCards, gateways}) => {
         <div
           className={
             deliveryMethodState === 'courier' ?
-            'checkout__shipping-delivery checkout__shipping-delivery--checked' :
-            'checkout__shipping-delivery'
+              'checkout__shipping-delivery checkout__shipping-delivery--checked' :
+              'checkout__shipping-delivery'
           }
-          onClick={()=>{setDeliveryMethodState('courier')}}
+          onClick={() => { setDeliveryMethodState('courier') }}
         >
           <div>
             {
               deliveryMethodState === 'courier' ?
-              <Image src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
-              <Image src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
+                <img src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
+                <img src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
             }
           </div>
           <div>
@@ -408,7 +439,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
   }
 
   // Payment component
-  const CheckoutPayment = ({creditCards, gateways}) => {
+  const CheckoutPayment = ({ creditCards, gateways }) => {
     // payment method state
     const [paymentState, setPaymentState] = useState(true);
     // select payment state
@@ -423,13 +454,13 @@ const CheckoutContent = ({creditCards, gateways}) => {
               {
                 creditCards.map(
                   (item, index) => (
-                    <div 
+                    <div
                       key={index}
                       className={selectPaymentState === item.name ? 'checkout__payment-card checkout__payment-card--selected' : 'checkout__payment-card'}
-                      onClick={()=>{setSelectPaymentState(item.name)}}
+                      onClick={() => { setSelectPaymentState(item.name) }}
                     >
-                      <Image 
-                        src={item.image}
+                      <Image
+                        src={getImageSrc(item.image)}
                         width={136}
                         height={46}
                         loading="eager"
@@ -447,13 +478,13 @@ const CheckoutContent = ({creditCards, gateways}) => {
               {
                 gateways.map(
                   (item, index) => (
-                    <div 
+                    <div
                       key={index}
                       className={selectPaymentState === item.name ? 'checkout__payment-card checkout__payment-card--selected' : 'checkout__payment-card'}
-                      onClick={()=>{setSelectPaymentState(item.name)}}
+                      onClick={() => { setSelectPaymentState(item.name) }}
                     >
-                      <Image 
-                        src={item.image}
+                      <Image
+                        src={getImageSrc(item.image)}
                         width={136}
                         height={46}
                         loading="eager"
@@ -481,24 +512,24 @@ const CheckoutContent = ({creditCards, gateways}) => {
 
         <div
           className={`checkout__payment-method` + selectPaymentDeliveryClass}
-          onClick={()=>{setPaymentState(false)}}
+          onClick={() => { setPaymentState(false) }}
         >
           {
             paymentState === false ?
-            <Image src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
-            <Image src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
+              <img src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
+              <img src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
           }
           <span>Payment on Delivery</span>
         </div>
 
         <div
           className={`checkout__payment-method` + selectPaymentGatewaysClass}
-          onClick={()=>{setPaymentState(true)}}
+          onClick={() => { setPaymentState(true) }}
         >
           {
             paymentState === true ?
-            <Image src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
-            <Image src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
+              <img src="/svgs/radio-checked.svg" alt="radio" width={24} height={24} /> :
+              <img src="/svgs/radio-unchecked.svg" alt="radio" width={24} height={24} />
           }
           <span>Online Payment</span>
         </div>
@@ -525,10 +556,10 @@ const CheckoutContent = ({creditCards, gateways}) => {
         </div>
 
         <Link href='/' passHref
-           className="checkout__complete-back">
-            <span>Come back homepage</span>
-            <Image src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={24} height={24} />
-         
+          className="checkout__complete-back">
+          <span>Come back homepage</span>
+          <img src="/svgs/line-right-arrow-black.svg" alt="right arrow" width={24} height={24} />
+
         </Link>
       </div>
     )
@@ -574,7 +605,7 @@ const CheckoutContent = ({creditCards, gateways}) => {
   }
 }
 
-export async function getStaticProps () {
+export async function getStaticProps() {
   const productsAPI = [
     {
       name: 'White Lilies and Gerberas', price: '54',
@@ -591,19 +622,20 @@ export async function getStaticProps () {
   ];
 
   const creditCards = [
-    {name: 'visa', image: '/payment-card-visa_xbmobu.png'},
-    {name: 'master', image: '/payment-card-master_hk7o4r.png'},
-    {name: 'american-express', image: '/payment-card-american_wfurcp.png'},
-    {name: 'jcb', image: '/payment-card-jcb_qb5auz.png'},
-    {name: 'discover', image: '/payment-card-discover_jhud7f.png'},
+    { name: 'visa', image: '/payment-card-visa_xbmobu.png' },
+    { name: 'master', image: '/payment-card-master_hk7o4r.png' },
+    { name: 'american-express', image: '/payment-card-american_wfurcp.png' },
+    { name: 'jcb', image: '/payment-card-jcb_qb5auz.png' },
+    { name: 'discover', image: '/payment-card-discover_jhud7f.png' },
   ];
 
   const gateways = [
-    {name: 'paypal', image: '/payment-gateway-paypal_hp0gag.png'},
-    {name: 'stripe', image: '/payment-card-stripe_odvihl.png'},
+    { name: 'paypal', image: '/payment-gateway-paypal_hp0gag.png' },
+    { name: 'stripe', image: '/payment-card-stripe_odvihl.png' },
+    { name: 'mpesa', image: 'https://techmoran.com/wp-content/uploads/2025/12/1UCUl2bSj2RCyq6H.jpg' }, // Placeholder, user will likely have their own asset
   ];
 
   return {
-    props: {productsAPI, creditCards, gateways}
+    props: { productsAPI, creditCards, gateways }
   }
 }

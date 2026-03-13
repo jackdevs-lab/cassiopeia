@@ -8,7 +8,7 @@ import { getItems, setValue, setSearchKey } from "../redux/searchSlice"
 // functions
 import preventBodyScroll from "../function/preventBodyScroll"
 
-function useSearch () {
+function useSearch() {
   // merge items to an array
   const [allProducts, setAllProducts] = useState(null)
   // end products
@@ -22,7 +22,7 @@ function useSearch () {
   // get searchKey
   const searchKey = useSelector(state => state.search.searchKey)
   // handle on change value
-  const handleOnChangeValue = ({target: {value}}) => {
+  const handleOnChangeValue = ({ target: { value } }) => {
     // set value
     dispatch(setValue(value));
     // is typing, reset time to 0
@@ -43,11 +43,12 @@ function useSearch () {
   }
 
   useEffect(() => {
-    async function fetchAPI () {
-      const url = 'https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/.json'
+    async function fetchAPI() {
+      const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || 'https://florist-10b34-default-rtdb.asia-southeast1.firebasedatabase.app';
+      const url = `${dbUrl}/.json`
       const res = await fetch(url)
       const data = await res.json()
-      
+
       setAllProducts(getAllProducts(data))
     }
 
@@ -74,7 +75,7 @@ function useSearch () {
     dispatch(getItems(searchedItems))
   }, [dispatch, searchedItems])
 
-  return {searchValue, handleOnChangeValue}
+  return { searchValue, handleOnChangeValue }
 }
 
 export default useSearch

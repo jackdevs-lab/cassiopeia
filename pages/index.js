@@ -7,7 +7,7 @@ import BannerAds from "../components/contents/banner-ads"
 import Headline from "../components/contents/title"
 import Container from "../components/contents/slide-container"
 
-export default function Home ({latestProducts, banners, relevantProducts}) {
+export default function Home({ latestProducts, banners, relevantProducts }) {
   return (
     <>
       <Title>The Florist | Flower Store</Title>
@@ -21,7 +21,7 @@ export default function Home ({latestProducts, banners, relevantProducts}) {
       <Keywords>
         The Florist, flower store, florist online, buy fresh flower and plant
       </Keywords>
-      <OpenGraph 
+      <OpenGraph
         name="The Florist | Flower Store"
         desc="The best way to brighten the special day of a friend
           or loved one is with flowers. But what happens when that
@@ -47,26 +47,27 @@ export default function Home ({latestProducts, banners, relevantProducts}) {
 }
 
 export async function getStaticProps() {
+  const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || 'https://florist-10b34-default-rtdb.asia-southeast1.firebasedatabase.app';
   // fetch banner data
-  const resBanner = await fetch('https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/banner.json')
+  const resBanner = await fetch(`${dbUrl}/banner.json`)
   const banners = await resBanner.json()
   // fetch all flowers
-  const resAllFlowers = await fetch('https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/flowers.json')
+  const resAllFlowers = await fetch(`${dbUrl}/flowers.json`)
   const allProductsData = await resAllFlowers.json()
   // get latest flowers
-  const latestProducts = allProductsData.reverse().slice(0,5)
+  const latestProducts = allProductsData.reverse().slice(0, 5)
   // fetch all database
-  const resAllData = await fetch('https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/.json')
+  const resAllData = await fetch(`${dbUrl}/.json`)
   const getAllData = await resAllData.json()
   // function gets random key of array
   const getRandomPr = (page) => {
     if (page !== "flowers") {
-      return getAllData[page][Math.floor(Math.random()*getAllData[page].length)]
+      return getAllData[page][Math.floor(Math.random() * getAllData[page].length)]
     } else {
       // get flowers that is not in latest prs
       let getRandomPrTmp = []
       while (getRandomPrTmp.length < 1) {
-        const randomFlower = getAllData[page][Math.floor(Math.random()*getAllData[page].length)]
+        const randomFlower = getAllData[page][Math.floor(Math.random() * getAllData[page].length)]
         if (
           (randomFlower.id !== latestProducts[0].id) && (randomFlower.id !== latestProducts[1].id) &&
           (randomFlower.id !== latestProducts[2].id) && (randomFlower.id !== latestProducts[3].id) &&
@@ -102,7 +103,7 @@ export async function getStaticProps() {
 
     return twoRandomPrs
   }
-  
+
   const pages = ["flowers", "plants", "gifts"]
   // relevantProducts data
   const relevantProducts = []

@@ -8,15 +8,16 @@ import { useSelector, useDispatch } from "react-redux"
 import { setValue, setSearchKey, getItems } from "../redux/searchSlice"
 // functions
 import preventBodyScroll from "../function/preventBodyScroll"
+import { getImageSrc } from "../lib/imageLoader"
 
-export default function SearchModal ({searchModalRef}) {
+export default function SearchModal({ searchModalRef }) {
   // get searched items from global store
   const searchItems = useSelector(state => state.search.data)
   // get search value
   const searchValue = useSelector(state => state.search.value)
   // storage items
   const storagedElements = []
-  
+
   searchItems.forEach((item, index) => {
     storagedElements.push(
       <Item key={index} item={item} />
@@ -36,9 +37,10 @@ export default function SearchModal ({searchModalRef}) {
     <div ref={searchModalRef} className={handleShowModal}>
       {storagedElements}
     </div>
-  )}
+  )
+}
 
-function Item ({item}) {
+function Item({ item }) {
   const dispatch = useDispatch()
   // reset search input when redirect to the detail product
   const handleResetSearchInput = () => {
@@ -51,20 +53,20 @@ function Item ({item}) {
   return (
     <Link href={`/${item.page}/${item.id}`} passHref
       onClick={handleResetSearchInput} className="search-modal__item" >
-        <span className="search-modal__thumbnail">
-          <Image 
-            src={item.thumbnail}
-            width={100}
-            height={100}
-            alt="product thumbnail"
-          />
-        </span>
+      <span className="search-modal__thumbnail">
+        <Image
+          src={getImageSrc(item.thumbnail)}
+          width={100}
+          height={100}
+          alt="product thumbnail"
+        />
+      </span>
 
-        <span className="search-modal__group">
-          <span className="search-modal__name">{item.name}</span>
-          <span className="search-modal__price">${item.price}</span>
-        </span>
-    
+      <span className="search-modal__group">
+        <span className="search-modal__name">{item.name}</span>
+        <span className="search-modal__price">${item.price}</span>
+      </span>
+
     </Link>
   )
 }

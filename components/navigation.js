@@ -47,7 +47,7 @@ export default function Nav(props) {
       {tabs}
 
       <div className="nav__location">
-        <Image src="/svgs/location.svg" alt="location icon" width={24} height={24} />
+        <img src="/svgs/location.svg" alt="location icon" width={24} height={24} />
         <span>Kenya</span>
       </div>
     </nav>

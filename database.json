@@ -1,0 +1,344 @@
+{
+    "banner": [
+        {
+            "background": "/cass15_mrg4hb.jpg",
+            "btnTitle": "Shop now",
+            "description": "Best deals this week. Fresh flowers, plants and gifts",
+            "title": "40% off",
+            "type": "primary",
+            "url": "/flowers"
+        },
+        {
+            "background": "/cass23_gfwimt.png",
+            "btnTitle": "View now",
+            "description": "for loved ones",
+            "title": "Nice little gifts",
+            "type": "secondary",
+            "url": "/gifts"
+        },
+        {
+            "background": "/cass31_esdbjz.png",
+            "btnTitle": "View now",
+            "description": "for home comfort",
+            "title": "Plants",
+            "type": "secondary",
+            "url": "/plants"
+        }
+    ],
+    "flowers": [
+        {
+            "id": "0",
+            "imageType": "fill",
+            "includes": [
+                "Decorative pinecones",
+                "White orchid",
+                "Salix"
+            ],
+            "name": "White Christmas: White Orchid",
+            "occasion": "Christmas",
+            "oldPrice": "",
+            "price": "68",
+            "thumbnail": "/618e40d5bcba8685990865_fosmxc.webp",
+            "type": ""
+        },
+        {
+            "id": "1",
+            "imageType": "fill",
+            "includes": "",
+            "name": "Pink Bubbles: Roses and Alstroemerias",
+            "occasion": "Wedding",
+            "offer": "$10 off",
+            "oldPrice": "88",
+            "price": "78",
+            "thumbnail": "/618274163f319610627991_bw5ums.webp",
+            "type": [
+                "Rose",
+                "Alstroemerias"
+            ]
+        },
+        {
+            "id": "2",
+            "imageType": "fill",
+            "includes": [
+                "Decorative pinecones",
+                "Red roses",
+                "Red lilies",
+                "Decorative greenery"
+            ],
+            "name": "Red Magic: Lilies and Roses",
+            "occasion": "Wedding",
+            "offer": "Black Friday 20% Off",
+            "oldPrice": "59",
+            "price": "47.20",
+            "thumbnail": "/618e3f04107af397991135_r5och6.webp",
+            "type": [
+                "Lilies",
+                "Roses"
+            ]
+        },
+        {
+            "id": "3",
+            "imageType": "fill",
+            "includes": [
+                "White lilies",
+                "White lisianthus",
+                "White veronia",
+                "Salix"
+            ],
+            "name": "Gentle Frost: Lilies and Lisianthus",
+            "occasion": "Birthday",
+            "offer": "$10 off",
+            "oldPrice": "49",
+            "price": "39",
+            "thumbnail": "/618e41e776eab328620835_yssucz.webp",
+            "type": [
+                "Lilies",
+                "Lisianthus"
+            ]
+        },
+        {
+            "id": "4",
+            "imageType": "fill",
+            "includes": "",
+            "name": "Jolly Holly: Eryngium and Alstroemerias",
+            "occasion": "Christmas",
+            "offer": "$14 off",
+            "oldPrice": "73",
+            "price": "59",
+            "thumbnail": "/618e4590a0741095275917_t0fsvi.webp",
+            "type": [
+                "Alstroemerias"
+            ]
+        },
+        {
+            "id": "5",
+            "imageType": "fill",
+            "includes": [
+                "Pink roses",
+                "Pink chrysanthemums",
+                "Pink germini",
+                "Gypsophila"
+            ],
+            "name": "Strawberry Mousse: Roses and Gerberas",
+            "occasion": "Wedding",
+            "offer": "$9 off",
+            "oldPrice": "78",
+            "price": "69",
+            "thumbnail": "/61827a9ebed9c874381634_vankxh.webp",
+            "type": [
+                "Roses",
+                "Gerberas"
+            ]
+        },
+        {
+            "id": "6",
+            "imageType": "transparent",
+            "includes": "",
+            "name": "Lilies and Roses",
+            "occasion": "Birthday",
+            "offer": "$11 off",
+            "oldPrice": "50",
+            "price": "39",
+            "thumbnail": "/5d84d53800517236157520_awcivk.webp",
+            "type": [
+                "Lilies",
+                "Roses"
+            ]
+        },
+        {
+            "id": "7",
+            "imageType": "transparent",
+            "includes": "",
+            "name": "Roses and Lilies",
+            "occasion": "",
+            "offer": "Black Friday 50%",
+            "oldPrice": "82",
+            "price": "41",
+            "thumbnail": "/5d84d46e1fe63737087781_eztymk.webp",
+            "type": [
+                "Roses",
+                "Lilies"
+            ]
+        },
+        {
+            "id": "8",
+            "imageType": "transparent",
+            "includes": "",
+            "name": "Chrysanthemums and Roses",
+            "occasion": "Birthday",
+            "oldPrice": "",
+            "price": "44",
+            "thumbnail": "/5d19dc8cc0983744838000_xc256j.webp",
+            "type": [
+                "Chrysanthemums",
+                "Roses"
+            ]
+        },
+        {
+            "id": "9",
+            "imageType": "transparent",
+            "includes": "",
+            "name": "Red Roses and White Lilies",
+            "occasion": "Christmas",
+            "oldPrice": "",
+            "price": "99",
+            "thumbnail": "/5d84dc1a631b2292689077_nihv8m.webp",
+            "type": [
+                "Roses",
+                "Lilies"
+            ]
+        },
+        {
+            "id": "10",
+            "imageType": "transparent",
+            "includes": "",
+            "name": "White Lilies and Gerberas",
+            "occasion": "Birthday",
+            "oldPrice": "",
+            "price": "54",
+            "thumbnail": "/5cdd463408a93217111334_xbpxkx.webp",
+            "type": [
+                "Lilies",
+                "Gerberas"
+            ]
+        }
+    ],
+    "gifts": [
+        {
+            "id": "0",
+            "includes": [
+                "Crunchy milk chocolate turrón, with hazelnut praline and puffed rice (275 g)",
+                "The Amulet: Venezuelan dark chocolate with 72% cocoa, in the shape of precious gems (50 g)",
+                "The Guilty Pleasure: candied orange peel dipped in the finest Belgian dark chocolate (100 g)"
+            ],
+            "name": "Sweet Delicacy",
+            "occasion": "New year",
+            "oldPrice": "",
+            "price": "119",
+            "thumbnail": "/618d1b7b8d835793450004_ao3v1h.webp"
+        },
+        {
+            "id": "1",
+            "includes": "",
+            "name": "The Chef: Special Cooking Utensils",
+            "occasion": "",
+            "oldPrice": "",
+            "price": "99",
+            "thumbnail": "/613f0bdc87ccb416975689_pomruq.webp"
+        },
+        {
+            "id": "2",
+            "includes": [
+                "16 Lindor milk chocolates",
+                "16 Lindor black chocolates",
+                "16 Lindor stracciatella chocolates"
+            ],
+            "name": "Chocolate Luxury Basket",
+            "occasion": "Valentine",
+            "oldPrice": "",
+            "price": "99",
+            "thumbnail": "/6184da374fbd0630625642_vbe2ln.webp"
+        },
+        {
+            "id": "3",
+            "includes": [
+                "2 premium-quality designer tinned delicacies (115 g)",
+                "Torres De Casta rosé wine (75 cl)",
+                "Torres Viña Esmeralda white wine (75 cl)"
+            ],
+            "name": "Taste of the Sea: Selection of Wines and Tinned Delights",
+            "occasion": "New year",
+            "offer": "Black Friday 40% Off",
+            "oldPrice": "150",
+            "price": "90",
+            "thumbnail": "/613efaa664fdd557877209_hvadrm.webp"
+        },
+        {
+            "id": "4",
+            "includes": "",
+            "name": "Premium Selection",
+            "occasion": "New year",
+            "oldPrice": "",
+            "price": "68",
+            "thumbnail": "/618d27dfa328c746557086_bl337f.webp"
+        },
+        {
+            "id": "5",
+            "includes": "",
+            "name": "Love of Chocolate",
+            "occasion": "Valentine",
+            "offer": "$10 off",
+            "oldPrice": "89",
+            "price": "79",
+            "thumbnail": "/6184e2a2c71d4438542627_moioxi.webp"
+        }
+    ],
+    "plants": [
+        {
+            "id": "0",
+            "name": "Calathea Zebra Plant",
+            "occasion": "",
+            "offer": "Black Friday 70% Off",
+            "oldPrice": "58",
+            "price": "17.40",
+            "thumbnail": "/61694097bfc2b371726052_njjyar.webp",
+            "type": "Calathea zebrina"
+        },
+        {
+            "id": "1",
+            "name": "Little Wish: Mini Christmas Tree",
+            "occasion": "Christmas",
+            "offer": "Black Friday 20% Off",
+            "oldPrice": "68",
+            "price": "54.40",
+            "thumbnail": "/618e42725ea15102872257_flumho.webp",
+            "type": "Pine tree"
+        },
+        {
+            "id": "2",
+            "name": "Peace Lily",
+            "occasion": "",
+            "oldPrice": "",
+            "price": "88",
+            "thumbnail": "/616e843705496063028168_gkrh2y.webp",
+            "type": "Spathiphyllum"
+        },
+        {
+            "id": "3",
+            "name": "Sweet Hearts: Anthurium and Chocolates",
+            "occasion": "Valentine",
+            "oldPrice": "",
+            "price": "68",
+            "thumbnail": "/61827ba285b51609405213_ldadlo.webp",
+            "type": "Anthurium"
+        },
+        {
+            "id": "4",
+            "name": "White dendrobium",
+            "occasion": "",
+            "offer": "$10 off",
+            "oldPrice": "99",
+            "price": "89",
+            "thumbnail": "/6169422546a23462867360_cdarsg.webp",
+            "type": "Dendrobium"
+        },
+        {
+            "id": "5",
+            "name": "Yellow Orchid",
+            "occasion": "",
+            "oldPrice": "",
+            "price": "49",
+            "thumbnail": "/616e8246df56f283508971_uzhy3p.webp",
+            "type": "Orchid"
+        },
+        {
+            "id": "6",
+            "name": "Floating Hearts: Pink Anthurium",
+            "occasion": "",
+            "oldPrice": "",
+            "price": "77",
+            "thumbnail": "/616e81d111478243436969_i0toc5.webp",
+            "type": "Anthurium"
+        }
+    ]
+}

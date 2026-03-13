@@ -25,8 +25,9 @@ import detailProductReducer from "../../reducers/detail-pr-reducer"
 // redux
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../../redux/cartSlice"
+import { getImageSrc } from "../../lib/imageLoader"
 
-export default function DetailPage ({prs, relevantFlowers, page}) {
+export default function DetailPage({ prs, relevantFlowers, page }) {
   const initState = {
     "amount": 1
   }
@@ -41,7 +42,7 @@ export default function DetailPage ({prs, relevantFlowers, page}) {
       <Keywords>
         {'Buy ' + prs.name}
       </Keywords>
-      <OpenGraph 
+      <OpenGraph
         name={prs.name}
         desc={handleDescriptionText(prs)}
         image={'https://res.cloudinary.com/didlxgowc/image/upload/f_auto,c_limit,w_1920,q_auto' + prs.thumbnail}
@@ -61,17 +62,18 @@ export default function DetailPage ({prs, relevantFlowers, page}) {
 }
 
 export async function getStaticPaths() {
-  const res = await fetch(`https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/.json`)
+  const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || 'https://florist-10b34-default-rtdb.asia-southeast1.firebasedatabase.app';
+  const res = await fetch(`${dbUrl}/.json`)
   const allData = await res.json()
 
   // pre-render based on page
   const paths = []
   const pageNameArr = Object.keys(allData)
-  pageNameArr.forEach((pageName)=>{
+  pageNameArr.forEach((pageName) => {
     // the json data have a lot of keys, they includes the pages.
     // So we have to check the product page which have detail product
-    if ((pageName === "flowers") || (pageName === "plants") || (pageName ==="gifts")) {
-      allData[pageName].forEach((item)=>{
+    if ((pageName === "flowers") || (pageName === "plants") || (pageName === "gifts")) {
+      allData[pageName].forEach((item) => {
         paths.push({
           params: {
             page: pageName,
@@ -82,16 +84,17 @@ export async function getStaticPaths() {
     }
   })
 
-  return {paths, fallback: false}
+  return { paths, fallback: false }
 }
 
-export async function getStaticProps({params}) {
+export async function getStaticProps({ params }) {
+  const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || 'https://florist-10b34-default-rtdb.asia-southeast1.firebasedatabase.app';
   const pageName = params.page
-  const res = await fetch(`https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/${pageName}/${params.detail}.json`)
+  const res = await fetch(`${dbUrl}/${pageName}/${params.detail}.json`)
   const prs = await res.json()
 
   // handle relevant product function
-  const getFlowersData = await fetch(`https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/${pageName}.json`)
+  const getFlowersData = await fetch(`${dbUrl}/${pageName}.json`)
   const flowersData = await getFlowersData.json()
   // relevantPrApi() returns relevantFlowers data
   const relevantFlowers = relevantPrApi(flowersData, params.detail)
@@ -105,14 +108,14 @@ export async function getStaticProps({params}) {
   }
 }
 
-function ImagesContainer ({avatarImage, imageType, nameImage}) {
+function ImagesContainer({ avatarImage, imageType, nameImage }) {
   const addedClass = imageType === "transparent" ? " product-detail__images-container--pd" : ''
 
   return (
     <div className="product-detail__images">
       <div className={"product-detail__images-container" + addedClass}>
-        <Image 
-          src={avatarImage}
+        <Image
+          src={getImageSrc(avatarImage)}
           width={568}
           height={568}
           layout="responsive"
@@ -123,24 +126,24 @@ function ImagesContainer ({avatarImage, imageType, nameImage}) {
       <div className="product-detail__label-bar">
         <div className="product-detail__label">
           <img src="/svgs/free-i.svg" alt="label" />
-          <span>Benefits<br/> description</span>
+          <span>Benefits<br /> description</span>
         </div>
 
         <div className="product-detail__label">
           <img src="/svgs/star-i.svg" alt="label" />
-          <span>Always fresh<br/> flowers</span>
+          <span>Always fresh<br /> flowers</span>
         </div>
 
         <div className="product-detail__label">
           <img src="/svgs/camera-i.svg" alt="label" />
-          <span>Take photo<br/> of bouquet</span>
+          <span>Take photo<br /> of bouquet</span>
         </div>
       </div>
     </div>
   )
 }
 
-function InforContainer ({prDetail, page, prState, dispatch}) {
+function InforContainer({ prDetail, page, prState, dispatch }) {
   // use redux
   const reduxDispatch = useDispatch()
   // product state
@@ -173,17 +176,17 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
 
   // multiple openDropdownRefs
   const openDropdownRef = useRef([]);
-  openDropdownRef.current = [1,2,3].map(
+  openDropdownRef.current = [1, 2, 3].map(
     (index) => openDropdownRef.current[index] = React.createRef()
   );
   // multiple closeDropdownRefs
   const closeDropdownRef = useRef([]);
-  closeDropdownRef.current = [1,2,3].map(
+  closeDropdownRef.current = [1, 2, 3].map(
     (index) => closeDropdownRef.current[index] = React.createRef()
   );
   // multiple content button
   const contentRef = useRef([]);
-  contentRef.current = [1,2,3].map(
+  contentRef.current = [1, 2, 3].map(
     (index) => contentRef.current[index] = React.createRef()
   );
   // added item to cart ref
@@ -201,7 +204,7 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
     }
   }, [cartItems, page, prId])
   // component partials
-  const PrName = ({children}) => <div className="product-detail__name">{children}</div>;
+  const PrName = ({ children }) => <div className="product-detail__name">{children}</div>;
   const PrPrice = () => (
     <div className="product-detail__price">
       <div className="product-detail__m-name">
@@ -218,13 +221,13 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
     <div className="product-detail__count">
       <div className="product-detail__label">Count:</div>
       <div className="product-detail__count--counter">
-        <img 
-          src="/svgs/minus-i.svg" alt="minus" 
+        <img
+          src="/svgs/minus-i.svg" alt="minus"
           onClick={decreaseAmountPr}
         />
         <span>{prAmount}</span>
-        <img 
-          src="/svgs/plus-i.svg" alt="plus" 
+        <img
+          src="/svgs/plus-i.svg" alt="plus"
           onClick={increaseAmountPr}
         />
       </div>
@@ -240,7 +243,7 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
       </div>
     </div>
   );
-  const PrTextGroup = ({children}) => (
+  const PrTextGroup = ({ children }) => (
     <div className="product-detail__text-group">
       {children}
     </div>
@@ -253,13 +256,13 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
             Type{
               Array.isArray(prTypes) === true && prTypes.length > 1 ? 's: ' : ': '
             }
-    
+
             {
               Array.isArray(prTypes) === true ? prTypes.map((item, index) => {
                 if (prTypes.length === index + 1) {
                   return item;
                 }
-    
+
                 return item + ", "
               }) : prTypes
             }
@@ -284,16 +287,16 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
     }
   }
   const PrButtonGroup = () => (
-    <div 
+    <div
       className="product-detail__button-group"
-      onClick={() => reduxDispatch(addToCart({...prDetail, amount: prAmount, page: page}))}
+      onClick={() => reduxDispatch(addToCart({ ...prDetail, amount: prAmount, page: page }))}
     >
       <Link href='/checkout'
-         className="product-detail__order-btn">Order now
+        className="product-detail__order-btn">Order now
       </Link>
       <div
         className="product-detail__cart-btn"
-        onClick={() => reduxDispatch(addToCart({...prDetail, amount: prAmount, page: page}))}
+        onClick={() => reduxDispatch(addToCart({ ...prDetail, amount: prAmount, page: page }))}
       >
         <img src="/svgs/cart-btn-square.svg" alt="add to cart" />
 
@@ -306,10 +309,10 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
       </div>
     </div>
   );
-  const PrListContent = ({title, content, openDropdownRef, closeDropdownRef,contentRef}) => (
+  const PrListContent = ({ title, content, openDropdownRef, closeDropdownRef, contentRef }) => (
     <div className="product-detail__list-content">
       <div
-        onClick={()=>{handleShowChildButton(openDropdownRef, closeDropdownRef, contentRef)}}
+        onClick={() => { handleShowChildButton(openDropdownRef, closeDropdownRef, contentRef) }}
         className="product-detail__list-button"
       >
         <span>{title}</span>
@@ -317,7 +320,7 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
         <img ref={closeDropdownRef} className="hiden" src="/svgs/minus-dropdown.svg" alt="minus" />
       </div>
 
-      <div 
+      <div
         ref={contentRef}
         className="product-detail__list-children product-detail__list-children--hidden"
       >
@@ -336,8 +339,8 @@ function InforContainer ({prDetail, page, prState, dispatch}) {
 
   // array contents of buttons
   const listContentButton = [
-    {title: 'Bouquet contents', content: 'No content yet'},
-    {title: 'Includes', content: prIncludes},
+    { title: 'Bouquet contents', content: 'No content yet' },
+    { title: 'Includes', content: prIncludes },
     {
       title: 'Delivery & Pay policy',
       content: 'Each bouquet is unique and is prepared by an expert florist and our customer service team is at your service to ensure the best experience possible.'

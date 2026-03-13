@@ -2,32 +2,32 @@ import Link from "next/link"
 import Image from "next/legacy/image"
 
 const socialMedia = [
-  {name: 'instagram', url: 'https://www.instagram.com', image: '/svgs/instagram.svg'},
-  {name: 'whatsapp', url: 'https://www.whatsapp.com', image: '/svgs/whatsapp.svg'},
-  {name: 'facebook', url: 'https://www.facebook.com', image: '/svgs/facebook.svg'},
+  { name: 'instagram', url: 'https://www.instagram.com', image: '/svgs/instagram.svg' },
+  { name: 'whatsapp', url: 'https://www.whatsapp.com', image: '/svgs/whatsapp.svg' },
+  { name: 'facebook', url: 'https://www.facebook.com', image: '/svgs/facebook.svg' },
 ];
 
 const helpAPI = [
-  {title: 'Contact us', url: '/contact-us'},
-  {title: 'Delivery information', url: '/delivery-information'},
-  {title: 'Payment information', url: '/payment-information'},
-  {title: 'Customer service', url: '/customer-service'},
-  {title: 'FAQ', url: '/faq'}
+  { title: 'Contact us', url: '/contact-us' },
+  { title: 'Delivery information', url: '/delivery-information' },
+  { title: 'Payment information', url: '/payment-information' },
+  { title: 'Customer service', url: '/customer-service' },
+  { title: 'FAQ', url: '/faq' }
 ];
 
 const aboutAPI = [
-  {title: 'Our stores', url: '/our-stores'},
-  {title: 'Flower care', url: '/flower-care'},
-  {title: 'Site map', url: '/site-map'}
+  { title: 'Our stores', url: '/our-stores' },
+  { title: 'Flower care', url: '/flower-care' },
+  { title: 'Site map', url: '/site-map' }
 ];
 
 const legalAPI = [
-  {title: 'Privacy policy', url: '/privacy-policy'},
-  {title: 'Terms & Conditions', url: '/terms-and-conditions'},
-  {title: 'Cookie policy', url: '/cookie-policy'}
+  { title: 'Privacy policy', url: '/privacy-policy' },
+  { title: 'Terms & Conditions', url: '/terms-and-conditions' },
+  { title: 'Cookie policy', url: '/cookie-policy' }
 ];
 
-function Tab (props) {
+function Tab(props) {
   return (
     <span>
       <Link href={props.url} passHref>
@@ -37,15 +37,15 @@ function Tab (props) {
   )
 }
 
-function MediaLink (props) {
+function MediaLink(props) {
   return (
     <a href={props.url} passHref>
-      <Image src={props.image} alt={props.name} width={24} height={24} />
+      <img src={props.image} alt={props.name} width={24} height={24} />
     </a>
   )
 }
 
-export default function Footer () {
+export default function Footer() {
   const mediaList = [];
   socialMedia.forEach((item, index) => {
     mediaList.push(
@@ -116,7 +116,7 @@ export default function Footer () {
             </div>
           </div>
         </div>
-        
+
         <div className="footer__row-2">
           &copy; Copyright,  2025. Developed by <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fmagic-portfolio-for-next-js-zeta-murex.vercel.app%2F%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExYXplSm9qTWJ3MTh4bjA4bHNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR5uOuRjNb2W8Fyaqf4dCt8BleGYUTmR5qJ0qPgKXpvAhTp1ux-ty8TjGcxedw_aem_lIBSJsK24_atEQ6DC0y4dw&h=AT2aOmxq6Dlhz9AS9LhqBUIsTpEGgjSsBth-MmyE6s5kwAOzHFAzwLLhrqhS38h_hJ-uh71R6aKpUQX2x5LX1P6PM9ZnnCt-Si6V2OdL-AC2itUMQmfzsNjrvX216M4_oOxp">Ndegwa</a>
         </div>

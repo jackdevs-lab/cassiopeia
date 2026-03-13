@@ -10,7 +10,7 @@ import PageName from "../../components/contents/page-name"
 import Headline from "../../components/contents/title"
 import Container from "../../components/contents/slide-container"
 
-export default function Disconts ({offerPrs}) {
+export default function Disconts({ offerPrs }) {
   return (
     <div className="disconts">
       <Title>Disconts | The Florist</Title>
@@ -27,7 +27,7 @@ export default function Disconts ({offerPrs}) {
       <PageName>Disconts</PageName>
 
       <Headline>Special offers</Headline>
-      <Container 
+      <Container
         className="disconts__container" page="disconts"
         prAPI={offerPrs} unSeeMore showOfferStock />
 
@@ -38,8 +38,9 @@ export default function Disconts ({offerPrs}) {
 }
 
 export async function getStaticProps() {
+  const dbUrl = process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || 'https://florist-10b34-default-rtdb.asia-southeast1.firebasedatabase.app';
   // fetch all database
-  const resAllData = await fetch('https://dh-cassiopeia-default-rtdb.asia-southeast1.firebasedatabase.app/.json')
+  const resAllData = await fetch(`${dbUrl}/.json`)
   const getAllData = await resAllData.json()
   // pages
   const pages = ["flowers", "plants", "gifts"]
@@ -49,7 +50,7 @@ export async function getStaticProps() {
   pages.forEach((page) => {
     getAllData[page].forEach((item) => {
       if (item.offer && item.offer !== "") {
-        offerPrs.push({...item, "page": page})
+        offerPrs.push({ ...item, "page": page })
       }
     })
   })
@@ -61,7 +62,7 @@ export async function getStaticProps() {
   }
 }
 
-function Events () {
+function Events() {
   return (
     <div className="disconts__events">
       <EventsImageGroup order='1'>
@@ -99,7 +100,7 @@ function Events () {
         <EventsCaption direction='vertical'>happy birthday</EventsCaption>
 
         <EventsImageGroup order='2-2'>
-          <EventsImage 
+          <EventsImage
             src="/31781897_10155755686363277_2831750321405952000_n.jpg_rzkgeb.jpg"
           />
 
@@ -107,7 +108,7 @@ function Events () {
             Happy Mother&#39;s Day
           </EventsCaption>
 
-          <EventsImage 
+          <EventsImage
             src="/31899025_10155755691763277_2010388124407955456_n.jpg_yeh6hh.jpg"
           />
 
@@ -120,7 +121,7 @@ function Events () {
   )
 }
 
-function EventsImageGroup ({children, order = ''}) {
+function EventsImageGroup({ children, order = '' }) {
   return (
     <div className={"disconts__events-image-group" + order}>
       {children}
@@ -128,11 +129,11 @@ function EventsImageGroup ({children, order = ''}) {
   )
 }
 
-function EventsImage ({objectFit = 'fill',
-  src = "/49153883_10156234250588277_759211318690447360_n.jpg_fsdolu.jpg", width = 1000, height = 1000}) {
+function EventsImage({ objectFit = 'fill',
+  src = "/49153883_10156234250588277_759211318690447360_n.jpg_fsdolu.jpg", width = 1000, height = 1000 }) {
   return (
     <div className="disconts__events-image">
-      <Image 
+      <Image
         src={src}
         width={width}
         height={height}
@@ -144,7 +145,7 @@ function EventsImage ({objectFit = 'fill',
   )
 }
 
-function EventsCaption ({children, direction = ''}) {
+function EventsCaption({ children, direction = '' }) {
   const addedClass = direction === 'vertical' ? " disconts__events-caption--vertical" : ''
   return (
     <div className={"disconts__events-caption" + addedClass}>
